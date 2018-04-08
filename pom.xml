@@ -42,13 +42,13 @@
 
 
     </dependencies>
-    <!--<build>-->
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.eclipse.jetty</groupId>-->
-                <!--<artifactId>jetty-maven-plugin</artifactId>-->
-                <!--<version>9.1.1.v20140108</version>-->
-            <!--</plugin>-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.1.1.v20140108</version>
+            </plugin>
             <!--<plugin>-->
                 <!--<groupId>org.apache.maven.plugins</groupId>-->
                 <!--<artifactId>maven-war-plugin</artifactId>-->
@@ -59,8 +59,8 @@
                     <!--<warName>ROOT</warName>-->
                 <!--</configuration>-->
             <!--</plugin>-->
-        <!--</plugins>-->
-    <!--</build>-->
+        </plugins>
+    </build>
     <profiles>
         <profile>
             <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
