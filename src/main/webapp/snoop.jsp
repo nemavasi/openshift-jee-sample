@@ -19,10 +19,11 @@
 <%
 HttpGet httpGet = new HttpGet("https://free-proxy-list.net");
 CloseableHttpResponse response1 = httpclient.execute(httpGet);
+String content;
 try {
 
  HttpEntity entity1 = response1.getEntity();
- String content = entity1.getContent();
+ content = entity1.getContent();
  int bufferSize = 1024;
  char[] buffer = new char[bufferSize];
  StringBuilder out2 = new StringBuilder();
