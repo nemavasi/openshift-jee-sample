@@ -4,6 +4,7 @@
 	<%@ page import="javax.servlet.http.HttpUtils,java.util.Enumeration" %>
 	<%@ page import="java.lang.management.*" %>
 	<%@ page import="java.util.*" %>
+	<%@ page import="org.apache.http.*" %>
 </HEAD>
 <BODY>
 
@@ -14,7 +15,33 @@
  
  
 <table border="0" width="100%">
- 
+
+<%
+HttpGet httpGet = new HttpGet("https://free-proxy-list.net");
+CloseableHttpResponse response1 = httpclient.execute(httpGet);
+try {
+
+ HttpEntity entity1 = response1.getEntity();
+ String content = entity1.getContent();
+ int bufferSize = 1024;
+ char[] buffer = new char[bufferSize];
+ StringBuilder out2 = new StringBuilder();
+ Reader in = new InputStreamReader(inputStream, "UTF-8");
+ for (; ; ) {
+     int rsz = in.read(buffer, 0, buffer.length);
+     if (rsz < 0)
+         break;
+     out2.append(buffer, 0, rsz);
+ }
+
+ EntityUtils.consume(entity1);
+} finally {
+ response1.close();
+}
+%>
+
+<%=out2.toString();%>
+
 <tbody>
 <tr>
 <td colspan="2" align="center">
