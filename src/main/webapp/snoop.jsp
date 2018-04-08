@@ -12,7 +12,7 @@
 <img src="images/jbosscorp_logo.png">
 
 <h2>JVM Memory Monitor</h2>
- 
+<%="qqq"%>
  
 <table border="0" width="100%">
 
