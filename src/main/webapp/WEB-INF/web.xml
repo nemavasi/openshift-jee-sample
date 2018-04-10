@@ -6,7 +6,8 @@
 
     <servlet>
         <servlet-name>getit</servlet-name>
-        <jsp-file>/getit.jsp</jsp-file>
+        <servlet-class>getit.MainServlet</servlet-class>
+        <!--<jsp-file>/getit.jsp</jsp-file>-->
 
     </servlet>
 
