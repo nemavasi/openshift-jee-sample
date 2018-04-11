@@ -14,30 +14,51 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by nemavasi on 4/10/18.
  */
 public class MainServlet extends HttpServlet {
-    private String message;
+
+    private Date cacheLastChanged;
+    private String cachedContent;
 
     public void init() throws ServletException {
         // Do required initialization
-        message = "Hello World";
+        //message = "Hello World";
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-//        // Set response content type
-//        response.setContentType("text/html");
-//
-        // Actual logic goes here.
+        // Set response content type
+        // response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-       // out.println("<h1>" + message + "</h1>");
+        out.println( getCachedContent());
+    }
+
+    public void destroy() {
+        // do nothing.
+    }
+
+    private String getCachedContent() throws IOException{
+        if (cacheLastChanged == null
+                || getDateDiff(cacheLastChanged,new Date(),TimeUnit.DAYS) > 1){
+            cachedContent =  getNeedContent();
+            cacheLastChanged = new Date();
+        }
+
+        System.out.println("cachedContent");
+        return cachedContent;
+    }
 
 
-        String content;
+    private String getNeedContent() throws IOException{
+
+        System.out.println("read content");
+
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet("https://free-proxy-list.net");
         httpGet.addHeader("User-Agent", "Mozilla/5.0");
@@ -57,15 +78,13 @@ public class MainServlet extends HttpServlet {
         }
         reader.close();
 
-        // print result
-        content = res.toString();
         httpClient.close();
-
-        out.println(content);
+        return res.toString();
     }
 
-    public void destroy() {
-        // do nothing.
+    public long getDateDiff(Date oldDate, Date newDate, TimeUnit timeUnit) {
+        long diffInMillies = newDate.getTime() - oldDate.getTime();
+        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
 
 }
