@@ -22,8 +22,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class MainServlet extends HttpServlet {
 
-    private static Date cacheLastChanged;
-    private static String cachedContent;
+    private Date cacheLastChanged;
+    private String cachedContent;
 
     public void init() throws ServletException {
         // Do required initialization
