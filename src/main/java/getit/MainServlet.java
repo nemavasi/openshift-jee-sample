@@ -22,8 +22,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class MainServlet extends HttpServlet {
 
-    private Date cacheLastChanged;
-    private String cachedContent;
+    private static Date cacheLastChanged;
+    private static String cachedContent;
 
     public void init() throws ServletException {
         // Do required initialization
@@ -50,14 +50,14 @@ public class MainServlet extends HttpServlet {
             cacheLastChanged = new Date();
         }
 
-        System.out.println("cachedContent");
+        //System.out.println("cachedContent");
         return cachedContent;
     }
 
 
     private String getNeedContent() throws IOException{
 
-        System.out.println("read content");
+        //System.out.println("read content");
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet("https://free-proxy-list.net");
